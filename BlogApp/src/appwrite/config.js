@@ -32,6 +32,40 @@ export class Service{
             console.log("Appwrite serive :: createPost :: error", error);
         }
     }
+
+    async updatePost(slug, {title, content, featuredImage, status}){
+        try {
+            return await this.databases.updateDocument(
+                config.appwriteDatabaseId,
+                config.appwriteCollectionId,
+                slug,
+                {
+                    title,
+                    content,
+                    featuredImage,
+                    status,
+
+                }
+            )
+        } catch (error) {
+            console.log("Appwrite serive :: updatePost :: error", error);
+        }
+    }
+
+    async deletePost(slug){
+        try {
+            await this.databases.deleteDocument(
+                config.appwriteDatabaseId,
+                config.appwriteCollectionId,
+                slug
+            
+            )
+            return true
+        } catch (error) {
+            console.log("Appwrite serive :: deletePost :: error", error);
+            return false
+        }
+    }
     
 }
 
